@@ -44,4 +44,16 @@ export class PostService {
   findAll() {
     return this.postRepository.find();
   }
+
+  async findOne(id: number) {
+    const post = await this.postRepository.findOne({
+      where: {id},
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return post;
+  }
 }
